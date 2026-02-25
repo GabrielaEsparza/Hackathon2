@@ -1,7 +1,16 @@
 package org.generation.hackathon.contactos;
+
+import java.util.HashSet;
+import java.util.Set;
 import org.generation.hackathon.clases.Contacto;
+
 public class Agenda {
-	private Contacto[] contactos = new Contacto[10];
+	private Set<Contacto> contactos;
+    private final int MAX_CONTACTOS = 10;
+
+    public Agenda() {
+        contactos = new HashSet<>();
+	}
 
 	
 	
@@ -28,28 +37,15 @@ public class Agenda {
 	
 	
 	//-------------------------------Agenda Llena----------------------------------
-	public boolean agendaLlena() {
-	    for (Contacto c : contactos) {
-	        if (c == null) {
-	            return false; // esto si hay espacio libre
-	        }
-	    }
-	    return true; // esto si esta llena
-	}//agendaLlena
-	
+	 public boolean agendaLlena() {
+        return contactos.size() >= MAX_CONTACTOS;
+    }//agendaLlena
+
 	//-------------------------------Espacios Libres----------------------------------
 	
-	public int espaciosLibres() {
-	    int contador = 0;
-
-	    for (Contacto c : contactos) {
-	        if (c == null) {
-	            contador++;
-	        }
-	    }
-
-	    return contador;
-	}//espaciosLibres
+ public int espaciosLibres() {
+        return MAX_CONTACTOS - contactos.size();
+    }//espaciosLibres
 	
 }//Agenda
 
