@@ -40,14 +40,35 @@ public class Agenda {
 	
 	//-------------------------------Listar Contactos----------------------------------
 	
-	
+    public void listarContactos() {
+    	System.out.println(contactos);
+    }
+
 	//-------------------------------Buscar contacto----------------------------------
 	
+    public void buscaContacto(String nombre) {
+    	for(Contacto c: contactos) {
+    		if(c.getName().contains(nombre)) {
+    		System.out.println(c.getTelefono());
+    		
+    		} else {
+    			System.out.println("El contacto no existe.");
+    		}
+    	}//for
+    		
+    }//Método buscarContacto
 	
 	
 	//-------------------------------Eliminar Contactos----------------------------------
 	
-	
+	public void eliminarContacto (Contacto c) {
+		if (contactos.contains(c)) {
+			contactos.remove((c));
+			System.out.println("El contacto ha sido eliminado.");
+		} else {
+			System.out.println("El contacto no pudo eliminarse porque no existía");
+		}// if-else
+	}
 	
 	//-------------------------------Agenda Llena----------------------------------
 	 public boolean agendaLlena() {
