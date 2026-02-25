@@ -1,16 +1,16 @@
 package org.generation.hackathon.clases;
 
 public class Contacto {
-	String name;
+	String nombre;
 	String telefono;
 
-	public Contacto(String name, String telefono) {
-		this.name = name;
+	public Contacto(String nombre, String telefono) {
+		this.nombre = nombre;
 		this.telefono = telefono;
 	}// Constructor
 
-	public String getName() {
-		return name;
+	public String getNombre() {
+		return nombre;
 	}// getName
 
 	public String getTelefono() {
@@ -23,7 +23,7 @@ public class Contacto {
 
 	@Override
 	public String toString() {
-		return name.toUpperCase() + ": " + telefono;
+		return nombre.toUpperCase() + ": " + telefono;
 	}// toString
 
 }// Contacto
