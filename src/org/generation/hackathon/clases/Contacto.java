@@ -27,7 +27,6 @@ public class Contacto {
 		return nombre.toUpperCase() + ": " + telefono;
 	}// setTelefono
 
-	// -----------------para que HashMap no acepte elementos con el mismo nombre--------
 	@Override
 	public boolean equals(Object objeto) {
 		if (this == objeto)
@@ -43,4 +42,3 @@ public class Contacto {
 		return nombre.toLowerCase().hashCode();
 	}
 }// contacto
-
