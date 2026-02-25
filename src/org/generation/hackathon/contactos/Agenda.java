@@ -47,27 +47,32 @@ public class Agenda {
 	//-------------------------------Buscar contacto----------------------------------
 	
     public void buscaContacto(String nombre) {
-    	for(Contacto c: contactos) {
-    		if(c.getName().contains(nombre)) {
-    		System.out.println(c.getTelefono());
-    		}//if
-    	}//for
-    	
-    	System.out.println("El contacto no existe.");
-    		
-    }//Método buscarContacto
+        boolean encontrado = false;
+
+        for (Contacto c : contactos) {
+            if (c.getName().equalsIgnoreCase(nombre)) {
+                System.out.println("Teléfono: " + c.getTelefono());
+                encontrado = true;
+                break; //para que deje de buscar si ya lo encontro
+            }//if
+        }//for
+
+        if (!encontrado) {
+            System.out.println("El contacto no existe.");
+        }//for
+    }//buscarContacto
 	
 	
 	//-------------------------------Eliminar Contactos----------------------------------
 	
-	public void eliminarContacto (Contacto c) {
-		if (contactos.contains(c)) {
-			contactos.remove((c));
-			System.out.println("El contacto ha sido eliminado.");
-		} else {
-			System.out.println("El contacto no pudo eliminarse porque no existía");
-		}// if-else
-	}
+    public void eliminarContacto(Contacto c) {
+        if (contactos.contains(c)) {
+            contactos.remove(c);
+            System.out.println("El contacto ha sido eliminado.");
+        } else {
+            System.out.println("El contacto no pudo eliminarse porque no existía.");
+        }
+    }
 	
 	//-------------------------------Agenda Llena----------------------------------
 	 public boolean agendaLlena() {
