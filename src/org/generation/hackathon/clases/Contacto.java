@@ -43,3 +43,4 @@ public class Contacto {
 		return nombre.toLowerCase().hashCode();
 	}
 }// contacto
+
