@@ -1,0 +1,90 @@
+package org.generation.hackathon.clases;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Agenda {
+	private Set<Contacto> contactos;
+	private int tamañoMaximo;
+
+	public Agenda() {
+		this(10);
+	}// Constructor Agenda default 10
+
+	public Agenda(int tamañoMaximo) {
+		this.tamañoMaximo = tamañoMaximo;
+		contactos = new HashSet<>();
+	}// Constructor Agenda tamaño variable
+
+	public int getSize() {
+		return this.tamañoMaximo;
+	}
+
+	//----------------------------------Metodos----------------------------------------
+
+	//-------------------------------A;adir contacto----------------------------------
+	public void añadirContacto(Contacto c) {
+		if (agendaLlena()) {
+			System.out.println("La agenda está llena, no se puede añadir el contacto.");
+			return;
+		}
+		if (existeContacto(c)) {
+			System.out.println("El contacto ya existe. No se pueden agregar duplicados.");
+			return;
+		}
+		contactos.add(c);
+		System.out.println("Contacto añadido.");
+	}
+
+	//-------------------------------Existe Contacto----------------------------------
+	public boolean existeContacto(Contacto c) {
+		return contactos.contains(c);
+	}
+
+	//-------------------------------Listar Contactos----------------------------------
+
+	public void listarContactos() {
+		System.out.println(contactos);
+	}
+
+	//-------------------------------Buscar contacto----------------------------------
+
+	public void buscaContacto(String nombre) {
+		boolean encontrado = false;
+
+		for (Contacto c : contactos) {
+			if (c.getName().equalsIgnoreCase(nombre)) {
+				System.out.println("Teléfono: " + c.getTelefono());
+				encontrado = true;
+				break; //para que deje de buscar si ya lo encontro
+			} //if
+		} //for
+
+		if (!encontrado) {
+			System.out.println("El contacto no existe.");
+		} //for
+	}//buscarContacto
+
+	//-------------------------------Eliminar Contactos----------------------------------
+
+	public void eliminarContacto(Contacto c) {
+		if (contactos.contains(c)) {
+			contactos.remove(c);
+			System.out.println("El contacto ha sido eliminado.");
+		} else {
+			System.out.println("El contacto no pudo eliminarse porque no existía.");
+		}
+	}
+
+	//-------------------------------Agenda Llena----------------------------------
+	public boolean agendaLlena() {
+		return contactos.size() >= tamañoMaximo;
+	}//agendaLlena
+
+	//-------------------------------Espacios Libres----------------------------------
+
+	public int espaciosLibres() {
+		return tamañoMaximo - contactos.size();
+	}//espaciosLibres
+
+}//Agenda
