@@ -50,11 +50,10 @@ public class Agenda {
     	for(Contacto c: contactos) {
     		if(c.getName().contains(nombre)) {
     		System.out.println(c.getTelefono());
-    		
-    		} else {
-    			System.out.println("El contacto no existe.");
-    		}
+    		}//if
     	}//for
+    	
+    	System.out.println("El contacto no existe.");
     		
     }//Método buscarContacto
 	
