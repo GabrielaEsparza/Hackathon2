@@ -20,10 +20,23 @@ public class Agenda {
 	
 	
 	//-------------------------------A;adir contacto----------------------------------
-	
+    public void añadirContacto(Contacto c) {
+		if (agendaLlena()) {
+			System.out.println("La agenda está llena, no se puede añadir el contacto.");
+			return;
+		}
+		if (existeContacto(c)) {
+			System.out.println("El contacto ya existe. No se pueden agregar duplicados.");
+			return;
+		}
+		contactos.add(c);
+		System.out.println("Contacto añadido.");
+	}
 	
 	//-------------------------------Existe Contacto----------------------------------
-	
+    public boolean existeContacto(Contacto c) {
+		return contactos.contains(c);
+	}
 	
 	//-------------------------------Listar Contactos----------------------------------
 	
