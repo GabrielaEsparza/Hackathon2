@@ -77,7 +77,7 @@ public class Funcionalidades {
 				break;
 
 			case 3:
-				agenda.listarContactos();
+				listarContactos();
 				break;
 
 			case 4:
@@ -158,6 +158,15 @@ public class Funcionalidades {
 			System.out.println("El contacto " + nombreExiste.toUpperCase() + " NO existe en la agenda.");
 		}
 	}//verificarContacto
+
+	private void listarContactos() {
+		if (agenda.agendaVacia()) {
+			System.out.println("La agenda está vacía.");
+		} else {
+			System.out.println("LISTA DE CONTACTOS:");
+			agenda.listarContactos();
+		}
+	}
 
 	private void buscarContacto() {
 		if (agenda.agendaVacia()) {
