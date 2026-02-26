@@ -24,9 +24,19 @@ public class Funcionalidades {
 		String respuesta = scanner.nextLine();
 
 		if (respuesta.equalsIgnoreCase("s")) {
-			System.out.print("Ingrese el tamaño de la agenda: ");
-			int tamaño = Integer.parseInt(scanner.nextLine());
-			agenda = new Agenda(tamaño);
+			try {
+				System.out.print("Ingrese el tamaño de la agenda: ");
+				int tamaño = Integer.parseInt(scanner.nextLine());
+				if (tamaño <= 0) {
+					System.out.println("El tamaño debe ser mayor a 0. Se usará tamaño por defecto (10).");
+					agenda = new Agenda();
+				} else {
+					agenda = new Agenda(tamaño);
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Entrada inválida. Se usará tamaño por defecto (10).");
+				agenda = new Agenda();
+			}
 		} else {
 			agenda = new Agenda();
 		}
@@ -47,8 +57,14 @@ public class Funcionalidades {
 			System.out.println("8. Salir");
 			System.out.print("Elige una opción: ");
 
-			opcion = scanner.nextInt();
-			scanner.nextLine();//limpiar buffer del enter
+			try {
+				opcion = scanner.nextInt();
+				scanner.nextLine();
+			} catch (Exception e) {
+				System.out.println("Por favor ingrese un número válido.");
+				scanner.nextLine();
+				opcion = -1;
+			}
 
 			switch (opcion) {
 
@@ -92,19 +108,46 @@ public class Funcionalidades {
 	}
 
 	private void añadirContacto() {
+		if (agenda.agendaLlena()) {
+			System.out.println("La agenda está llena, no se puede añadir más contactos.");
+			return;
+		}
+
 		System.out.print("Ingresa el nombre: ");
+
 		String nombre = scanner.nextLine();
 
+		if (nombre.trim().isEmpty()) {
+			System.out.println("El nombre no puede estar vacío.");
+			return;
+		}
+
 		System.out.print("Ingresa el teléfono: ");
+
 		String telefono = scanner.nextLine();
+
+		if (telefono.trim().isEmpty()) {
+			System.out.println("El teléfono no puede estar vacío.");
+			return;
+		}
 
 		Contacto nuevo = new Contacto(nombre, telefono);
 		agenda.añadirContacto(nuevo);
 	}//añadirContacto
 
 	private void verificarContacto() {
+		if (agenda.agendaVacia()) {
+			System.out.println("No hay contactos en la agenda.");
+			return;
+		}
+
 		System.out.print("Ingresa el nombre del contacto: ");
 		String nombreExiste = scanner.nextLine();
+
+		if (nombreExiste.trim().isEmpty()) {
+			System.out.println("El nombre no puede estar vacío.");
+			return;
+		}
 
 		Contacto contactoExiste = new Contacto(nombreExiste, "");
 		boolean existe = agenda.existeContacto(contactoExiste);
@@ -117,17 +160,52 @@ public class Funcionalidades {
 	}//verificarContacto
 
 	private void buscarContacto() {
+		if (agenda.agendaVacia()) {
+			System.out.println("No hay contactos en la agenda para buscar.");
+			return;
+		}
+
 		System.out.print("Ingresa el nombre a buscar: ");
+
 		String nombreBuscar = scanner.nextLine();
+
+		if (nombreBuscar.trim().isEmpty()) {
+			System.out.println("El nombre no puede estar vacío.");
+			return;
+		}
+
 		agenda.buscaContacto(nombreBuscar);
 	}//buscarContacto
 
 	private void eliminarContacto() {
+		if (agenda.agendaVacia()) {
+			System.out.println("No hay contactos en la agenda para eliminar.");
+			return;
+		}
+
 		System.out.print("Ingresa el nombre del contacto a eliminar: ");
 		String nombreEliminar = scanner.nextLine();
 
+		if (nombreEliminar.trim().isEmpty()) {
+			System.out.println("El nombre no puede estar vacío.");
+			return;
+		}
+
 		Contacto contactoEliminar = new Contacto(nombreEliminar, "");
-		agenda.eliminarContacto(contactoEliminar);
+
+		if (!agenda.existeContacto(contactoEliminar)) {
+			System.out.println("El contacto no existe en la agenda.");
+			return;
+		}
+
+		System.out.print("¿Estás seguro de eliminar a " + nombreEliminar.toUpperCase() + "? (S/N): ");
+		String confirmacion = scanner.nextLine();
+
+		if (confirmacion.equalsIgnoreCase("s")) {
+			agenda.eliminarContacto(contactoEliminar);
+		} else {
+			System.out.println("Eliminación cancelada.");
+		}
 	}//eliminarContacto
 
 	private void agendaLlena() {
