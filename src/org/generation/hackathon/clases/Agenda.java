@@ -39,7 +39,9 @@ public class Agenda {
 	}//existeContacto
 
 	public void listarContactos() {
-		System.out.println(contactos);
+		for (Contacto contacto : contactos) {
+			System.out.println(contacto.toString());
+		}
 	}//listarContactos
 
 	public void buscaContacto(String nombre) {
