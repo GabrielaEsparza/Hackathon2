@@ -9,20 +9,18 @@ public class Agenda {
 
 	public Agenda() {
 		this(10);
-	}// Constructor Agenda default 10
+	}// Constructor Default
 
 	public Agenda(int tamañoMaximo) {
 		this.tamañoMaximo = tamañoMaximo;
 		contactos = new HashSet<>();
-	}// Constructor Agenda tamaño variable
+	}// Constructor Variable
 
 	public int getSize() {
 		return this.tamañoMaximo;
-	}
+	}//getSize
 
 	//----------------------------------Metodos----------------------------------------
-
-	//-------------------------------A;adir contacto----------------------------------
 	public void añadirContacto(Contacto c) {
 		if (agendaLlena()) {
 			System.out.println("La agenda está llena, no se puede añadir el contacto.");
@@ -34,20 +32,15 @@ public class Agenda {
 		}
 		contactos.add(c);
 		System.out.println("Contacto añadido.");
-	}
+	}//añadirContacto
 
-	//-------------------------------Existe Contacto----------------------------------
 	public boolean existeContacto(Contacto c) {
 		return contactos.contains(c);
-	}
-
-	//-------------------------------Listar Contactos----------------------------------
+	}//existeContacto
 
 	public void listarContactos() {
 		System.out.println(contactos);
-	}
-
-	//-------------------------------Buscar contacto----------------------------------
+	}//listarContactos
 
 	public void buscaContacto(String nombre) {
 		boolean encontrado = false;
@@ -65,8 +58,6 @@ public class Agenda {
 		} //for
 	}//buscarContacto
 
-	//-------------------------------Eliminar Contactos----------------------------------
-
 	public void eliminarContacto(Contacto c) {
 		if (contactos.contains(c)) {
 			contactos.remove(c);
@@ -74,17 +65,18 @@ public class Agenda {
 		} else {
 			System.out.println("El contacto no pudo eliminarse porque no existía.");
 		}
-	}
+	}//eliminarContacto
 
-	//-------------------------------Agenda Llena----------------------------------
 	public boolean agendaLlena() {
 		return contactos.size() >= tamañoMaximo;
 	}//agendaLlena
 
-	//-------------------------------Espacios Libres----------------------------------
-
 	public int espaciosLibres() {
 		return tamañoMaximo - contactos.size();
 	}//espaciosLibres
+
+	public boolean agendaVacia() {
+		return contactos.isEmpty();
+	}//agendaVacia
 
 }//Agenda
